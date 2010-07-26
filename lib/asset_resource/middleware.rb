@@ -8,8 +8,14 @@ class AssetResource::Middleware
     @app = app
     @options = options
 
-    handle :scripts
-    handle :stylesheets
+    if options[:handlers] then
+      options[:handlers].each do |handler, mime_type|
+        handle handler.to_sym, mime_type
+      end
+    else
+      handle :scripts, "text/javascript"
+      handle :styles,  "text/css"
+    end
 
     translator :less do |filename|
       begin
@@ -34,15 +40,16 @@ class AssetResource::Middleware
     if env["PATH_INFO"] =~ %r{\A/assets/(.+)\B}
       type = $1.split(".").first
       return app.call(env) unless handles?(type)
-      return [200, asset_headers, process_files(files_for(type))]
+      return [200, asset_headers(type), process_files(files_for(type))]
     end
     app.call(env)
   end
 
 private ######################################################################
 
-  def asset_headers
-    options[:asset_headers] || { "Cache-Control" => "public, max-age=86400" }
+  def asset_headers(type)
+    headers = options[:asset_headers] || { "Cache-Control" => "public, max-age=86400" }
+    headers.merge("Content-Type" => handlers[type.to_sym])
   end
 
   def base_path
@@ -62,15 +69,15 @@ private ######################################################################
   end
 
   def handlers
-    @handler ||= []
-  end
-
-  def handle(type)
-    handlers << type.to_sym
+    @handler ||= {}
   end
 
   def handles?(type)
-    handlers.include?(type.to_sym)
+    handlers.keys.include?(type.to_sym)
+  end
+
+  def handle(type, mime_type)
+    handlers[type.to_sym] = mime_type
   end
 
   def default_translator

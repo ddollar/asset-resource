@@ -2,6 +2,7 @@ require "spec_helper"
 require "asset_resource/middleware"
 
 describe AssetResource::Middleware do
+
   let(:app) { lambda { |env| [ 200, {}, ['bar'] ]} }
   let(:middleware) { AssetResource::Middleware.new(app, :base_path => asset_fixture) }
 
@@ -31,9 +32,19 @@ describe AssetResource::Middleware do
   end
 
   it "serves styles" do
-    data = RestClient.get("http://localhost/assets/stylesheets.css")
+    data = RestClient.get("http://localhost/assets/styles.css")
     data.should include "color: #1e5500"
     data.should include "color: #5a5500"
+  end
+
+  it "serves scripts with the proper mime type" do
+    response = RestClient.get("http://localhost/assets/scripts.js")
+    response.headers[:content_type].should == "text/javascript"
+  end
+
+  it "serves styles with the proper mime type" do
+    response = RestClient.get("http://localhost/assets/styles.css")
+    response.headers[:content_type].should == "text/css"
   end
 
 end
