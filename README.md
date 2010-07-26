@@ -68,6 +68,13 @@ Built-in configuration and helpers for Rails 2.x, Rails 3.x and Sinatra.
 
 The gem will add appropriate view helpers to your framework of choice.
 
+You can use the middleware yourself like this:
+
+    use AssetResource::Middleware,
+      :base_path => "public",
+      :handlers  => { :javascripts => "text/javascript",
+                      :stylesheets => "text/css" }
+
 ## Copyright
 
 MIT License
