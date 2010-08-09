@@ -57,7 +57,9 @@ private ######################################################################
   end
 
   def files_for(type)
-    Dir.glob(File.expand_path(File.join(base_path, type, "**", "*")))
+    Dir.glob(File.expand_path(File.join(base_path, type, "**", "*"))).select do |file|
+      File.exist?(file)
+    end
   end
 
   def process_files(files)
