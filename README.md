@@ -20,8 +20,8 @@ Built-in configuration and helpers for Rails 2.x, Rails 3.x and Sinatra.
     # app/views/layouts/application.html.erb
     <html>
       <head>
+        <%= asset_resource_javascripts %>
         <%= asset_resource_stylesheets %>
-        <%= asset_resource_scripts %>
       </head>
     </html>
 
@@ -36,8 +36,8 @@ Built-in configuration and helpers for Rails 2.x, Rails 3.x and Sinatra.
     # app/views/layouts/application.html.erb
     <html>
       <head>
+        <%= asset_resource_javascripts %>
         <%= asset_resource_stylesheets %>
-        <%= asset_resource_scripts %>
       </head>
     </html>
 
