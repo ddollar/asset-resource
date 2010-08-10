@@ -31,7 +31,7 @@ Built-in configuration and helpers for Rails 2.x, Rails 3.x and Sinatra.
     # public/javascripts/*.js
 
     # Gemfile
-    gem "asset_resource"
+    gem "asset-resource"
 
     # app/views/layouts/application.html.erb
     <html>
