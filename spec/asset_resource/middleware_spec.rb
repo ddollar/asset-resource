@@ -33,8 +33,8 @@ describe AssetResource::Middleware do
 
   it "serves styles" do
     data = RestClient.get("http://localhost/assets/styles.css")
-    data.should include "color: #1e5500"
-    data.should include "color: #5a5500"
+    data.should include "#1e5500"
+    data.should include "#5a5500"
   end
 
   it "serves scripts with the proper mime type" do
@@ -45,6 +45,11 @@ describe AssetResource::Middleware do
   it "serves styles with the proper mime type" do
     response = RestClient.get("http://localhost/assets/styles.css")
     response.headers[:content_type].should == "text/css"
+  end
+
+  it "should not serve a file that begins with an underscore" do
+    data = RestClient.get("http://localhost/assets/styles.css")
+    data.should_not include "#c55000"
   end
 
 end
