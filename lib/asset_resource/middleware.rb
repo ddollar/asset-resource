@@ -58,7 +58,7 @@ private ######################################################################
 
   def files_for(type)
     Dir.glob(File.expand_path(File.join(base_path, type, "**", "*"))).select do |file|
-      File.exist?(file)
+      File.exist?(file) && file[0..0] != "_"
     end
   end
 
