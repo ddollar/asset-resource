@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{asset-resource}
-  s.version = "0.1.1"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["David Dollar"]
-  s.date = %q{2010-08-08}
+  s.date = %q{2010-08-16}
   s.description = %q{Manage CSS/JS assets as dynamic resources rather than static files}
   s.email = %q{ddollar@gmail.com}
   s.extra_rdoc_files = [
