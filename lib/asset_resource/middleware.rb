@@ -91,6 +91,7 @@ private ######################################################################
   end
 
   def translator(type, &block)
+    return default_translator unless type
     translators[type.to_sym] = block if block_given?
     translators[type.to_sym]
   end

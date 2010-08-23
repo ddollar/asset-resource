@@ -52,4 +52,13 @@ describe AssetResource::Middleware do
     data.should_not include "#c55000"
   end
 
+  describe "with a blank file extension" do
+    let(:middleware) { AssetResource::Middleware.new(app, :base_path => asset_fixture("blank_extension")) }
+
+    it "should render properly without" do
+      data = RestClient.get("http://localhost/assets/styles.css")
+      data.should include "somedata"
+    end
+  end
+
 end
