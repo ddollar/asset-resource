@@ -1,0 +1,44 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    artifice (0.5)
+      rack-test
+    diff-lcs (1.1.2)
+    fakefs (0.2.1)
+    haml (3.0.17)
+    less (1.2.21)
+      mutter (>= 0.4.2)
+      treetop (>= 1.4.2)
+    mime-types (1.16)
+    mutter (0.5.3)
+    polyglot (0.3.1)
+    rack (1.2.1)
+    rack-test (0.5.4)
+      rack (>= 1.0)
+    rake (0.8.7)
+    rcov (0.9.8)
+    rest-client (1.5.1)
+      mime-types (>= 1.16)
+    rspec (2.0.0.beta.19)
+      rspec-core (= 2.0.0.beta.19)
+      rspec-expectations (= 2.0.0.beta.19)
+      rspec-mocks (= 2.0.0.beta.19)
+    rspec-core (2.0.0.beta.19)
+    rspec-expectations (2.0.0.beta.19)
+      diff-lcs (>= 1.1.2)
+    rspec-mocks (2.0.0.beta.19)
+    treetop (1.4.8)
+      polyglot (>= 0.3.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  artifice (~> 0.5)
+  fakefs (~> 0.2.1)
+  haml (~> 3.0.9)
+  less (~> 1.2.21)
+  rake (~> 0.8.7)
+  rcov (~> 0.9.8)
+  rest-client (~> 1.5.1)
+  rspec (~> 2.0.0.beta.19)
