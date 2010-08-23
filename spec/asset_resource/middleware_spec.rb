@@ -55,7 +55,7 @@ describe AssetResource::Middleware do
   describe "with a blank file extension" do
     let(:middleware) { AssetResource::Middleware.new(app, :base_path => asset_fixture("blank_extension")) }
 
-    it "should render properly without" do
+    it "should render files without extensions properly" do
       data = RestClient.get("http://localhost/assets/styles.css")
       data.should include "somedata"
     end
