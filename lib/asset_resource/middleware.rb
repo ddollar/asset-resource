@@ -17,6 +17,9 @@ class AssetResource::Middleware
       handle :styles,  "text/css"
     end
 
+    translator :css, &passthrough_translator
+    translator :js,  &passthrough_translator
+
     translator :less do |filename|
       begin
         require "less"
@@ -83,6 +86,10 @@ private ######################################################################
   end
 
   def default_translator
+    lambda { |filename| "" }
+  end
+
+  def passthrough_translator
     lambda { |filename| File.read(filename) }
   end
 

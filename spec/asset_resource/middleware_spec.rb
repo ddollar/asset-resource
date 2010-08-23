@@ -55,9 +55,18 @@ describe AssetResource::Middleware do
   describe "with a blank file extension" do
     let(:middleware) { AssetResource::Middleware.new(app, :base_path => asset_fixture("blank_extension")) }
 
-    it "should render files without extensions properly" do
+    it "should not try to render files with no extension" do
       data = RestClient.get("http://localhost/assets/styles.css")
-      data.should include "somedata"
+      data.should include "#c55000"
+    end
+  end
+
+  describe "with images" do
+    let(:middleware) { AssetResource::Middleware.new(app, :base_path => asset_fixture("with_images")) }
+
+    it "should not render unknown file types" do
+      data = RestClient.get("http://localhost/assets/styles.css")
+      data.should == "test\n"
     end
   end
 
