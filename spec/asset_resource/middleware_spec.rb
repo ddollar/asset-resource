@@ -4,7 +4,7 @@ require "asset_resource/middleware"
 describe AssetResource::Middleware do
 
   let(:app) { lambda { |env| [ 200, {}, ['bar'] ]} }
-  let(:middleware) { AssetResource::Middleware.new(app, :base_path => asset_fixture) }
+  let(:middleware) { AssetResource::Middleware.new(app, :base_path => asset_fixture("normal")) }
 
   before(:each) do
     Artifice.activate_with(middleware)
