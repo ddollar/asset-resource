@@ -58,8 +58,8 @@ Built-in configuration and helpers for Rails 2.x, Rails 3.x and Sinatra.
     @@ layout
     %html
       %head
-        = asset_resource_scripts
-        = asset_resource_styles
+        = asset_resource_javascripts
+        = asset_resource_stylesheets
 
 ## Technical Details
 
