@@ -70,4 +70,13 @@ describe AssetResource::Middleware do
     end
   end
 
+  describe "with subdirs" do
+    let(:middleware) { AssetResource::Middleware.new(app, :base_path => asset_fixture("with_subdir")) }
+
+    it "should render files in subdirs" do
+      data = RestClient.get("http://localhost/assets/styles.css")
+      data.should == "test\n"
+    end
+  end
+
 end
