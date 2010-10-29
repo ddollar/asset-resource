@@ -10,6 +10,40 @@ describe AssetResource::Middleware do
     Artifice.activate_with(middleware)
   end
 
+  context "separating out cache" do
+    let(:middleware) { AssetResource::Middleware.new(app, :base_path => asset_fixture,
+                                                    :handlers => {:scripts_1 => "text/javascript",
+                                                    :scripts_2 => 'text/javascript'}) }
+    before do
+      middleware.options[:handlers] = { :scripts_1 => "text/javascript",
+                                        :scripts_2 => "text/javascript" }
+    end
+
+    context "first split" do
+      it "includes the files in the first split" do
+        data = RestClient.get("http://localhost/assets/scripts_1.js")
+        data.should include("console.log('I am script 1')")
+      end
+
+      it "does not include the files in the second split" do
+        data = RestClient.get("http://localhost/assets/scripts_1.js")
+        data.should_not include("console.log('I am script 2')")
+      end
+    end
+
+    context "second split" do
+      it "includes the files in the second split" do
+        data = RestClient.get("http://localhost/assets/scripts_1.js")
+        data.should include("console.log('I am script 1')")
+      end
+
+      it "does not include the files in the first split" do
+        data = RestClient.get("http://localhost/assets/scripts_1.js")
+        data.should_not include("console.log('I am script 2')")
+      end
+    end
+  end
+
   it "passes unhandled requests" do
     RestClient.get("http://localhost/foo").to_s.should == "bar"
   end
