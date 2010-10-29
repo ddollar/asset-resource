@@ -39,8 +39,7 @@ class AssetResource::Middleware
   def call(env)
     if env["PATH_INFO"] =~ %r{\A/assets/(.+)\B}
       type = $1.split(".").first
-      return app.call(env) unless handles?(type)
-      return [200, asset_headers(type), process_files(files_for(type))]
+      return [200, asset_headers(type), process_files(files_for(type))] if handles?(type)
     end
     app.call(env)
   end
