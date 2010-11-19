@@ -1,7 +1,7 @@
 require "rubygems"
 
 $:.unshift File.expand_path("../lib", __FILE__)
-require "asset_resource"
+require "asset_resource/version"
 
 Gem::Specification.new do |gem|
   gem.name     = "asset-resource"
