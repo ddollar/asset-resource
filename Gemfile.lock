@@ -1,11 +1,16 @@
+PATH
+  remote: .
+  specs:
+    asset-resource (0.3.1)
+
 GEM
   remote: http://rubygems.org/
   specs:
-    artifice (0.5)
+    artifice (0.6)
       rack-test
     diff-lcs (1.1.2)
     fakefs (0.2.1)
-    haml (3.0.17)
+    haml (3.0.24)
     less (1.2.21)
       mutter (>= 0.4.2)
       treetop (>= 1.4.2)
@@ -13,11 +18,11 @@ GEM
     mutter (0.5.3)
     polyglot (0.3.1)
     rack (1.2.1)
-    rack-test (0.5.4)
+    rack-test (0.5.6)
       rack (>= 1.0)
     rake (0.8.7)
     rcov (0.9.8)
-    rest-client (1.5.1)
+    rest-client (1.6.1)
       mime-types (>= 1.16)
     rspec (2.0.0.beta.19)
       rspec-core (= 2.0.0.beta.19)
@@ -34,11 +39,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  artifice (~> 0.5)
+  artifice (~> 0.6)
+  asset-resource!
   fakefs (~> 0.2.1)
-  haml (~> 3.0.9)
+  haml (~> 3.0.23)
   less (~> 1.2.21)
   rake
   rcov (~> 0.9.8)
-  rest-client (~> 1.5.1)
-  rspec (~> 2.0.0.beta.19)
+  rest-client (~> 1.6.1)
+  rspec (~> 2.0.0)
