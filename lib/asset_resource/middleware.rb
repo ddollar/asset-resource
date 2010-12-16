@@ -37,6 +37,15 @@ class AssetResource::Middleware
         raise "Tried to translate a sass file but could not find the library.\nTry adding this to your Gemfile:\n  gem \"haml\""
       end
     end
+    
+    translator :scss do |filename|
+      begin
+        require 'sass'
+        Sass::Engine.new(File.read(filename), :syntax => :scss, :load_paths => [File.dirname(filename)]).render
+      rescue LoadError
+        raise "Tried to translate a sass file but could not find the library.\nTry adding this to your Gemfile:\n  gem \"haml\""
+      end
+    end
   end
 
   def call(env)
