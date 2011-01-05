@@ -68,8 +68,12 @@ private ######################################################################
   end
 
   def files_for(type)
-    Dir.glob(File.expand_path(File.join(base_path, type, "**", "*"))).select do |file|
-      File.exist?(file) && File.basename(file)[0..0] != "_"
+    if filenames = options[:handlers][:files]
+      filenames.map{|filename| File.join(base_path, type, filename)}.select{|file| File.exists?(file)}
+    else
+      Dir.glob(File.expand_path(File.join(base_path, type, "**", "*"))).select do |file|
+        File.exist?(file) && File.basename(file)[0..0] != "_"
+      end
     end
   end
 
