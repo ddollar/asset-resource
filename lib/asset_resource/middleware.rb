@@ -37,6 +37,15 @@ class AssetResource::Middleware
         raise "Tried to translate a sass file but could not find the library.\nTry adding this to your Gemfile:\n  gem \"haml\""
       end
     end
+    
+    translator :scss do |filename|
+      begin
+        require 'sass'
+        Sass::Engine.new(File.read(filename), :syntax => :scss, :load_paths => [File.dirname(filename)]).render
+      rescue LoadError
+        raise "Tried to translate a sass file but could not find the library.\nTry adding this to your Gemfile:\n  gem \"haml\""
+      end
+    end
   end
 
   def call(env)
@@ -59,8 +68,12 @@ private ######################################################################
   end
 
   def files_for(type)
-    Dir.glob(File.expand_path(File.join(base_path, type, "**", "*"))).select do |file|
-      File.exist?(file) && File.basename(file)[0..0] != "_"
+    if filenames = options[:handlers][:files]
+      filenames.map{|filename| File.join(base_path, type, filename)}.select{|file| File.exists?(file)}
+    else
+      Dir.glob(File.expand_path(File.join(base_path, type, "**", "*"))).select do |file|
+        File.exist?(file) && File.basename(file)[0..0] != "_"
+      end
     end
   end
 
